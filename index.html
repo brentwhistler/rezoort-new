@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="icon" type="image/webp" href="/rezoort-new/assets/favico.webp">
+    <script src="config.js"></script>
     <style>
         .instagram-gallery {
             display: grid;
@@ -666,6 +667,65 @@
         </div>
     </section>
 
+    <!-- Google Reviews Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Reseñas de Google</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Lo que dicen nuestros clientes sobre Rezoort</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <!-- Google Reviews Widget -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center">
+                                <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                    <i class="fab fa-google text-amber-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Rezoort en Google</h3>
+                                    <div class="flex items-center mt-1">
+                                        <div class="flex text-amber-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="text-gray-600 ml-2">5.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="https://www.google.com/maps/place/?q=place_id:ChIJ__-DoiZBw4URdYMkjBu2ykM" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                                Ver en Google Maps
+                            </a>
+                        </div>
+                        
+                        <!-- Reviews Container -->
+                        <div id="google-reviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Loading State -->
+                            <div class="col-span-full text-center py-8">
+                                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
+                                <p class="text-gray-600">Cargando reseñas...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- View All Reviews Button -->
+                        <div class="text-center mt-8">
+                            <a href="https://www.google.com/maps/place/?q=place_id:ChIJ__-DoiZBw4URdYMkjBu2ykM" target="_blank" class="inline-flex items-center text-amber-600 hover:text-amber-700 font-semibold transition duration-300">
+                                Ver todas las reseñas en Google
+                                <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Map Section -->
     <div class="h-96 w-full fade-in">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.788970396443!2d-98.1963889246835!3d19.06225395310579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc0e5eef2d0a1%3A0x9e4a5a8a7d9a7b5b!2sAv%2028%20Ote%20215%2C%20Xanenetla%2C%2072290%20Puebla%2C%20Pue.!5e0!3m2!1ses-419!2smx!4v1684879420125!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -859,6 +919,235 @@
                 }
             });
         });
+
+        // Google Reviews Integration
+        function loadGoogleReviews() {
+            const placeId = CONFIG.PLACE_ID;
+            const reviewsContainer = document.getElementById('google-reviews');
+            
+            // Show loading state
+            reviewsContainer.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
+                    <p class="text-gray-600">Cargando reseñas...</p>
+                </div>
+            `;
+            
+            // Use Google Apps Script as backend
+            const scriptUrl = CONFIG.GOOGLE_APPS_SCRIPT_URL;
+            
+            // Fetch reviews through Google Apps Script
+            fetch(`${scriptUrl}?placeId=${placeId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Google Apps Script Response:', data); // Debug logging
+                    if (data.status === 'OK' && data.result && data.result.reviews && data.result.reviews.length > 0) {
+                        displayReviews(data.result.reviews, data.result.rating, data.result.user_ratings_total);
+                    } else if (data.status === 'OK' && data.result) {
+                        // Place found but no reviews
+                        showNoReviewsMessage();
+                    } else {
+                        // API error
+                        console.error('API Error:', data.status, data.error_message);
+                        showErrorMessage();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching reviews:', error);
+                    showErrorMessage();
+                });
+        }
+        
+        function displayReviews(reviews, rating, totalRatings) {
+            const reviewsContainer = document.getElementById('google-reviews');
+            
+            // Update the rating display
+            const ratingElement = document.querySelector('.text-amber-400 + span');
+            if (ratingElement && rating) {
+                ratingElement.textContent = rating.toFixed(1);
+            }
+            
+            // Filter out low-rated reviews (1 and 2 stars) and sort by rating (highest first)
+            const filteredReviews = reviews
+                .filter(review => review.rating >= 3)
+                .sort((a, b) => b.rating - a.rating);
+            
+            // Display reviews (limit to 6 for grid layout)
+            const reviewsToShow = filteredReviews.slice(0, 6);
+            
+            if (reviewsToShow.length === 0) {
+                // If no good reviews after filtering, show a message
+                reviewsContainer.innerHTML = `
+                    <div class="col-span-full text-center py-8">
+                        <div class="bg-amber-50 rounded-lg p-6">
+                            <i class="fas fa-star text-amber-400 text-4xl mb-4"></i>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Reseñas en proceso</h4>
+                            <p class="text-gray-600 mb-4">Estamos trabajando para obtener las mejores reseñas para ti.</p>
+                            <p class="text-sm text-gray-500">¡Sé el primero en dejar una reseña positiva!</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let reviewsHTML = '';
+            
+            reviewsToShow.forEach(review => {
+                const stars = generateStars(review.rating);
+                const relativeTime = getRelativeTime(review.time);
+                
+                reviewsHTML += `
+                    <div class="bg-gray-50 rounded-lg p-6 hover:shadow-md transition duration-300">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-amber-600 font-semibold text-sm">${review.author_name.charAt(0).toUpperCase()}</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-800">${review.author_name}</h4>
+                                <div class="flex items-center">
+                                    <div class="flex text-amber-400 text-sm">
+                                        ${stars}
+                                    </div>
+                                    <span class="text-gray-500 text-sm ml-2">${relativeTime}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 text-sm leading-relaxed">${review.text}</p>
+                    </div>
+                `;
+            });
+            
+            reviewsContainer.innerHTML = reviewsHTML;
+        }
+        
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i - 0.5 <= rating) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+        
+        function getRelativeTime(timestamp) {
+            const now = new Date();
+            const reviewDate = new Date(timestamp * 1000);
+            const diffInDays = Math.floor((now - reviewDate) / (1000 * 60 * 60 * 24));
+            
+            if (diffInDays === 0) return 'Hoy';
+            if (diffInDays === 1) return 'Ayer';
+            if (diffInDays < 7) return `Hace ${diffInDays} días`;
+            if (diffInDays < 30) return `Hace ${Math.floor(diffInDays / 7)} semanas`;
+            if (diffInDays < 365) return `Hace ${Math.floor(diffInDays / 30)} meses`;
+            return `Hace ${Math.floor(diffInDays / 365)} años`;
+        }
+        
+        function showNoReviewsMessage() {
+            const reviewsContainer = document.getElementById('google-reviews');
+            reviewsContainer.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <div class="bg-amber-50 rounded-lg p-6">
+                        <i class="fas fa-star text-amber-400 text-4xl mb-4"></i>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">No hay reseñas disponibles</h4>
+                        <p class="text-gray-600 mb-4">Aún no hay reseñas para este lugar en Google.</p>
+                        <p class="text-sm text-gray-500">¡Sé el primero en dejar una reseña!</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showErrorMessage() {
+            const reviewsContainer = document.getElementById('google-reviews');
+            reviewsContainer.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <div class="bg-red-50 rounded-lg p-6">
+                        <i class="fas fa-exclamation-triangle text-red-400 text-4xl mb-4"></i>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Error al cargar reseñas</h4>
+                        <p class="text-gray-600 mb-4">No se pudieron cargar las reseñas de Google en este momento.</p>
+                        <p class="text-sm text-gray-500">Por favor, intenta más tarde o visita Google Maps directamente.</p>
+                        <div class="mt-4">
+                            <button onclick="retryGoogleReviews()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                                Intentar de nuevo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function retryGoogleReviews() {
+            // Retry using Google Apps Script
+            const placeId = CONFIG.PLACE_ID;
+            const reviewsContainer = document.getElementById('google-reviews');
+
+            // Show loading state
+            reviewsContainer.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
+                    <p class="text-gray-600">Reintentando...</p>
+                </div>
+            `;
+
+            // Use Google Apps Script as backend
+            const scriptUrl = CONFIG.GOOGLE_APPS_SCRIPT_URL;
+            
+            // Fetch reviews through Google Apps Script
+            fetch(`${scriptUrl}?placeId=${placeId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK' && data.result && data.result.reviews && data.result.reviews.length > 0) {
+                        displayReviews(data.result.reviews, data.result.rating, data.result.user_ratings_total);
+                    } else {
+                        showNoReviewsMessage();
+                    }
+                })
+                .catch(error => {
+                    console.error('Retry failed:', error);
+                    showNoReviewsMessage();
+                });
+        }
+
+        // Load reviews when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGoogleReviews();
+        });
+        
+        // Debug function to test Google Apps Script connection
+        function testGoogleAPI() {
+            const placeId = CONFIG.PLACE_ID;
+            const scriptUrl = CONFIG.GOOGLE_APPS_SCRIPT_URL;
+            
+            console.log('Testing Google Apps Script...');
+            console.log('Place ID:', placeId);
+            console.log('Script URL:', scriptUrl);
+            
+            // Test Google Apps Script connectivity
+            fetch(`${scriptUrl}?placeId=${placeId}`)
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Google Apps Script Response:', data);
+                })
+                .catch(error => {
+                    console.error('Google Apps Script Test Error:', error);
+                });
+        }
+        
+        // Uncomment the next line to test API connectivity in browser console
+        // testGoogleAPI();
     </script>
 	
 	<script type="application/ld+json">
