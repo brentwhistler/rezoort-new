@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezoort - Guardería y Hospedaje Canino en Puebla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="icon" type="image/webp" href="/assets/favico.webp">
+    <style>
+        .instagram-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .instagram-media {
+            min-width: 100% !important;
+            width: 100% !important;
+        }
+        
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f59e0b;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div>
+                    <img src="/assets/logo-rezoort.jpg" alt="Rezoort" class="w-24 h-24"/>
+                </div>
+
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#inicio" class="nav-link text-gray-700 hover:text-amber-600">Inicio</a>
+                <a href="#servicios" class="nav-link text-gray-700 hover:text-amber-600">Servicios</a>
+                <a href="#reservas" class="nav-link text-gray-700 hover:text-amber-600">Reservas</a>
+                <a href="#galeria" class="nav-link text-gray-700 hover:text-amber-600">Galería</a>
+                <a href="#contacto" class="nav-link text-gray-700 hover:text-amber-600">Contacto</a>
+            </nav>
+            
+            <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-white py-2 px-4 shadow-md" id="mobile-menu">
+            <a href="#inicio" class="block py-2 text-gray-700 hover:text-amber-600">Inicio</a>
+            <a href="#servicios" class="block py-2 text-gray-700 hover:text-amber-600">Servicios</a>
+            <a href="#reservas" class="block py-2 text-gray-700 hover:text-amber-600">Reservas</a>
+            <a href="#galeria" class="block py-2 text-gray-700 hover:text-amber-600">Galería</a>
+            <a href="#contacto" class="block py-2 text-gray-700 hover:text-amber-600">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative bg-gradient-to-r from-amber-100 to-amber-50 py-16 md:py-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 fade-in">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">El mejor cuidado para tu mejor amigo</h2>
+                <p class="text-lg text-gray-600 mb-6">En Rezoort ofrecemos hospedaje, guardería y servicios veterinarios con amor y profesionalismo en Puebla.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#reservas" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">Reservar ahora</a>
+                    <a href="#contacto" class="border-2 border-amber-600 text-amber-600 hover:bg-amber-50 font-semibold py-3 px-6 rounded-lg transition duration-300">Contactarnos</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 fade-in">
+                <div class="bg-white p-2 rounded-xl shadow-xl">
+                    <div class="rounded-lg overflow-hidden" style="max-height: 500px;">
+                        <img src="/assets/rezoort-hero.webp" alt="Perros jugando en Rezoort" class="w-full h-full object-cover rounded-lg" style="max-height: 500px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nuestros Servicios</h2>
+                <div class="w-20 h-1 bg-amber-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden fade-in flex flex-col">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/assets/rezoort-yard.webp" alt="Hospedaje canino" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-amber-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-home text-amber-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Hospedaje</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Ofrecemos un espacio seguro y cómodo para tu mascota cuando necesites viajar. Con áreas de juego, descanso y atención personalizada.</p>
+                        <ul class="text-gray-600 mb-4 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Áreas separadas por tamaños</li>
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Paseos diarios</li>
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Monitoreo 24/7</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <a href="#reservas" class="text-amber-600 font-semibold hover:text-amber-700 flex items-center">Reservar ahora <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden fade-in flex flex-col">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/assets/rezoort-vet.webp" alt="Servicios veterinarios" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-amber-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-stethoscope text-amber-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Veterinaria</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Servicios veterinarios profesionales para el cuidado de la salud de tu mascota. Consultas, vacunas, esterilizaciones y más.</p>
+                        <ul class="text-gray-600 mb-4 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Consultas generales</li>
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Vacunación</li>
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Cirugías</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <a href="#veterinaria" class="text-amber-600 font-semibold hover:text-amber-700 flex items-center">Agendar cita <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden fade-in flex flex-col">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/assets/rezoort-spa.webp" alt="Spa para perros" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-amber-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-spa text-amber-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Spa Estético</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Servicios de estética canina para mantener a tu mascota limpia, cómoda y con un pelaje saludable.</p>
+                        <ul class="text-gray-600 mb-4 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Baño terapéutico</li>
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Corte de pelo</li>
+                            <li class="flex items-center"><i class="fas fa-check text-amber-600 mr-2"></i> Cepillado y deslanado</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <a href="#contacto" class="text-amber-600 font-semibold hover:text-amber-700 flex items-center">Consultar disponibilidad <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="reservas" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Reserva con Nosotros</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Elige el servicio que necesitas para tu mascota y realiza tu reserva en línea.</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-4xl mx-auto fade-in">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-amber-600 p-6 text-white">
+                        <h3 class="text-xl font-bold mb-4">Opciones de Reserva</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <button class="w-full text-left py-2 px-4 rounded-lg bg-amber-700 font-medium booking-tab active" data-tab="lodging">Hospedaje</button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left py-2 px-4 rounded-lg hover:bg-amber-700 font-medium booking-tab" data-tab="daycare">Guardería de Día</button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left py-2 px-4 rounded-lg hover:bg-amber-700 font-medium booking-tab" data-tab="vet">Veterinaria</button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="md:w-2/3 p-6">
+                        <!-- Lodging Booking Form -->
+                        <div id="lodging-tab" class="booking-content">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Reserva de Hospedaje</h3>
+                            <form id="lodging-form">
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="lodging-dates">Fechas de estadía</label>
+                                    <input type="text" id="lodging-dates" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Selecciona fechas" readonly>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2">Tipo y tamaño de mascota</label>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                        <div>
+                                            <input type="checkbox" id="small-dog" name="pets[]" value="small-dog" class="hidden peer">
+                                            <label for="small-dog" class="block p-2 border rounded-lg text-center cursor-pointer peer-checked:border-amber-500 peer-checked:bg-amber-50">
+                                                <i class="fas fa-dog text-gray-700 mb-1"></i>
+                                                <span class="block">Perro pequeño</span>
+                                                <span class="block font-semibold">$200/noche</span>
+                                                <input type="number" min="0" max="5" value="0" class="w-full mt-2 px-2 py-1 border rounded" name="small-dog-count">
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="medium-dog" name="pets[]" value="medium-dog" class="hidden peer">
+                                            <label for="medium-dog" class="block p-2 border rounded-lg text-center cursor-pointer peer-checked:border-amber-500 peer-checked:bg-amber-50">
+                                                <i class="fas fa-dog text-gray-700 mb-1"></i>
+                                                <span class="block">Perro mediano</span>
+                                                <span class="block font-semibold">$250/noche</span>
+                                                <input type="number" min="0" max="5" value="0" class="w-full mt-2 px-2 py-1 border rounded" name="medium-dog-count">
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="large-dog" name="pets[]" value="large-dog" class="hidden peer">
+                                            <label for="large-dog" class="block p-2 border rounded-lg text-center cursor-pointer peer-checked:border-amber-500 peer-checked:bg-amber-50">
+                                                <i class="fas fa-dog text-gray-700 mb-1"></i>
+                                                <span class="block">Perro grande</span>
+                                                <span class="block font-semibold">$300/noche</span>
+                                                <input type="number" min="0" max="5" value="0" class="w-full mt-2 px-2 py-1 border rounded" name="large-dog-count">
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="cat" name="pets[]" value="cat" class="hidden peer">
+                                            <label for="cat" class="block p-2 border rounded-lg text-center cursor-pointer peer-checked:border-amber-500 peer-checked:bg-amber-50">
+                                                <i class="fas fa-cat text-gray-700 mb-1"></i>
+                                                <span class="block">Gato</span>
+                                                <span class="block font-semibold">$180/noche</span>
+                                                <input type="number" min="0" max="5" value="0" class="w-full mt-2 px-2 py-1 border rounded" name="cat-count">
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="other-pet" name="pets[]" value="other" class="hidden peer">
+                                            <label for="other-pet" class="block p-2 border rounded-lg text-center cursor-pointer peer-checked:border-amber-500 peer-checked:bg-amber-50">
+                                                <i class="fas fa-paw text-gray-700 mb-1"></i>
+                                                <span class="block">Otra mascota</span>
+                                                <span class="block font-semibold">$220/noche</span>
+                                                <input type="number" min="0" max="5" value="0" class="w-full mt-2 px-2 py-1 border rounded" name="other-pet-count">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="owner-name">Nombre del dueño</label>
+                                    <input type="text" id="owner-name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Tu nombre completo">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="phone">Teléfono</label>
+                                    <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="2221234567">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="email">Correo electrónico</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="tu@email.com">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="pet-names">Nombres de las mascotas</label>
+                                    <input type="text" id="pet-names" name="pet-names" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Ej: Fido (perro), Luna (gato), Max (perro)">
+                                    <p class="text-sm text-gray-500 mt-1">Indica el nombre y tipo de cada mascota entre paréntesis</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="special-notes">Notas especiales</label>
+                                    <textarea id="special-notes" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Alergias, medicamentos, comportamiento especial, etc."></textarea>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <div class="flex items-start">
+                                        <input type="checkbox" id="health-records" class="mt-1 mr-2">
+                                        <label for="health-records" class="text-gray-700">Confirmo que he enviado los registros de salud de mi(s) perro(s) a través del <a href="#records" class="text-amber-600 hover:underline">formulario de registros</a> o los enviaré antes del check-in.</label>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">Reservar Hospedaje</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Daycare Info -->
+                        <div id="daycare-tab" class="booking-content hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Guardería de Día</h3>
+                            <p class="text-gray-600 mb-6">Nuestro servicio de guardería diurna ofrece un espacio seguro y divertido para tu perro mientras estás ocupado. Horarios flexibles y mucho amor.</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold text-gray-800 mb-2">Horarios:</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h5 class="font-semibold text-gray-700 mb-2">Lunes a Sábado</h5>
+                                        <p class="text-gray-600">7:00 AM - 8:00 PM</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h5 class="font-semibold text-gray-700 mb-2">Domingo</h5>
+                                        <p class="text-gray-600">9:00 AM - 6:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold text-gray-800 mb-2">Precios:</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                                        <h5 class="font-semibold text-gray-700">Perros pequeños</h5>
+                                        <p class="text-amber-600 font-bold">$150/día</p>
+                                    </div>
+                                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                                        <h5 class="font-semibold text-gray-700">Perros medianos</h5>
+                                        <p class="text-amber-600 font-bold">$200/día</p>
+                                    </div>
+                                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                                        <h5 class="font-semibold text-gray-700">Perros grandes</h5>
+                                        <p class="text-amber-600 font-bold">$250/día</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
+                                <h4 class="font-bold text-blue-800 mb-2">¡Importante!</h4>
+                                <p class="text-blue-700">Todos los perros deben tener sus registros de salud al día (vacunas, desparasitación, etc.). Puedes enviarlos a través de nuestro <a href="#records" class="text-blue-600 hover:underline">formulario de registros</a>.</p>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-6">Para reservar nuestro servicio de guardería, contáctanos directamente por WhatsApp, teléfono o correo electrónico.</p>
+                            
+                            <div class="flex flex-wrap gap-3">
+                                <a href="https://wa.me/522228992473" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center">
+                                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+                                </a>
+                                <a href="tel:+522228992473" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center">
+                                    <i class="fas fa-phone mr-2"></i> Llamar
+                                </a>
+                                <a href="mailto:info@rezoort.com" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center">
+                                    <i class="fas fa-envelope mr-2"></i> Email
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Vet Booking Form -->
+                        <div id="vet-tab" class="booking-content hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Cita Veterinaria</h3>
+                            <form id="vet-form">
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-date">Fecha y hora</label>
+                                    <input type="text" id="vet-date" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Selecciona fecha y hora" readonly>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-service">Servicio requerido</label>
+                                    <select id="vet-service" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                        <option value="" disabled selected>Selecciona un servicio</option>
+                                        <option value="consulta">Consulta general - $300</option>
+                                        <option value="vacuna">Vacunación - $400</option>
+                                        <option value="desparasitacion">Desparasitación - $250</option>
+                                        <option value="esterilizacion">Esterilización - $1,200</option>
+                                        <option value="urgencia">Consulta de urgencia - $500</option>
+                                        <option value="otro">Otro servicio</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-owner-name">Nombre del dueño</label>
+                                    <input type="text" id="vet-owner-name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Tu nombre completo">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-phone">Teléfono</label>
+                                    <input type="tel" id="vet-phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="2221234567">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-email">Correo electrónico</label>
+                                    <input type="email" id="vet-email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="tu@email.com">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-dog-name">Nombre del perro</label>
+                                    <input type="text" id="vet-dog-name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Nombre de tu mascota">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-dog-breed">Raza</label>
+                                    <input type="text" id="vet-dog-breed" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Raza de tu mascota">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2" for="vet-notes">Notas adicionales</label>
+                                    <textarea id="vet-notes" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Síntomas, comportamiento, alergias conocidas, etc."></textarea>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">Agendar Cita</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Records Section -->
+    <section id="records" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Registros de Salud</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Envía los registros médicos de tu mascota para agilizar el proceso de reserva.</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-gray-50 rounded-xl shadow-md overflow-hidden p-6 fade-in">
+                <form id="records-form">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="records-owner-name">Nombre del dueño</label>
+                        <input type="text" id="records-owner-name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Tu nombre completo">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="records-phone">Teléfono</label>
+                        <input type="tel" id="records-phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="2221234567">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="records-email">Correo electrónico</label>
+                        <input type="email" id="records-email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="tu@email.com">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="records-dog-name">Nombre del perro</label>
+                        <input type="text" id="records-dog-name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Nombre de tu mascota">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="records-files">Documentos de salud</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                            <input type="file" id="records-files" class="hidden" multiple>
+                            <label for="records-files" class="cursor-pointer">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-500">Arrastra tus archivos aquí o haz clic para seleccionar</p>
+                                <p class="text-sm text-gray-400">Formatos aceptados: PDF, JPG, PNG (Máx. 5MB por archivo)</p>
+                            </label>
+                        </div>
+                        <div id="file-list" class="mt-2 text-sm text-gray-600"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="records-notes">Notas adicionales</label>
+                        <textarea id="records-notes" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Información adicional sobre la salud de tu mascota"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">Enviar Registros</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Conoce Nuestras Instalaciones</h2>
+                <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-xl">
+                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <div class="et_pb_video_box"><iframe loading="lazy" title="Hotel ReZoort, el lugar ideal para el cuidado de mascotas en Puebla" width="1080" height="608" src="https://www.youtube.com/embed/dnHd-IsyQNY?feature=oembed"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+				        <div style="background-image:url(//i.ytimg.com/vi/dnHd-IsyQNY/maxresdefault.jpg)" class="et_pb_video_overlay"><div class="et_pb_video_overlay_hover"><a href="#" class="et_pb_video_play"></a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nuestra Galería</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Momentos felices de nuestros huéspedes caninos.</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/rezoort/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/rezoort/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this profile on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/rezoort/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;" target="_blank">ReZOOrt</a> (@<a href="https://www.instagram.com/rezoort/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;" target="_blank">rezoort</a>) • Instagram photos and videos</p></div></blockquote>
+<script async src="//www.instagram.com/embed.js"></script>
+            <!-- Instagram Gallery Placeholder 
+            <div class="instagram-gallery fade-in">
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Perro en Rezoort" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1078&q=80" alt="Perros jugando" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Perro en spa" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1530046339914-562302b1fe07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Perro durmiendo" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Perro en veterinaria" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Perro feliz" class="w-full h-full object-cover">
+                </div>
+            </div>
+        -->
+            
+            <div class="text-center mt-8 fade-in">
+                <a href="https://instagram.com/rezoort" target="_blank" class="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                    <i class="fab fa-instagram mr-2"></i> Síguenos en Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contáctanos</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Estamos aquí para responder todas tus preguntas sobre el cuidado de tu mascota.</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Información de Contacto</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-amber-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Dirección</h4>
+                                <p class="text-gray-600">Av 28 Ote #215, Xanenetla, 72290 Puebla, Pue.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-amber-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Teléfono</h4>
+                                <p class="text-gray-600">+52 222-899-2473</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-envelope text-amber-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Correo electrónico</h4>
+                                <p class="text-gray-600">info@rezoort.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-clock text-amber-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Horario</h4>
+                                <p class="text-gray-600">Lunes a Sábado: 7:00 AM - 8:00 PM</p>
+                                <p class="text-gray-600">Domingo: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-gray-800 mb-3">Síguenos en redes sociales</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://www.facebook.com/reZOOrt" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://instagram.com/rezoort" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white p-3 rounded-full transition duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://wa.me/522228992473" target="_blank" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full transition duration-300">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 fade-in">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Envíanos un mensaje</h3>
+                    <form id="contact-form">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2" for="contact-name">Nombre</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Tu nombre">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2" for="contact-email">Correo electrónico</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="tu@email.com">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2" for="contact-phone">Teléfono (opcional)</label>
+                            <input type="tel" id="contact-phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="2221234567">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2" for="contact-subject">Asunto</label>
+                            <select id="contact-subject" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                                <option value="" disabled selected>Selecciona un asunto</option>
+                                <option value="reservacion">Reservación</option>
+                                <option value="servicios">Consulta de servicios</option>
+                                <option value="veterinaria">Cita veterinaria</option>
+                                <option value="general">Consulta general</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2" for="contact-message">Mensaje</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Escribe tu mensaje aquí"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="h-96 w-full fade-in">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.788970396443!2d-98.1963889246835!3d19.06225395310579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc0e5eef2d0a1%3A0x9e4a5a8a7d9a7b5b!2sAv%2028%20Ote%20215%2C%20Xanenetla%2C%2072290%20Puebla%2C%20Pue.!5e0!3m2!1ses-419!2smx!4v1684879420125!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div>
+                            <img src="/assets/logo-rezoort.jpg" alt="Rezoort" class="w-24 h-24"/>
+                        </div>
+                        
+                    </div>
+                    <p class="text-gray-400">El mejor cuidado para tu mejor amigo en Puebla, México.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Servicios</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#reservas" class="text-gray-400 hover:text-amber-400 transition duration-300">Hospedaje</a></li>
+                        <li><a href="#reservas" class="text-gray-400 hover:text-amber-400 transition duration-300">Guardería de día</a></li>
+                        <li><a href="#veterinaria" class="text-gray-400 hover:text-amber-400 transition duration-300">Servicios veterinarios</a></li>
+                        <li><a href="#servicios" class="text-gray-400 hover:text-amber-400 transition duration-300">Spa estético</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Enlaces útiles</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#records" class="text-gray-400 hover:text-amber-400 transition duration-300">Registros de salud</a></li>
+                        <li><a href="#contacto" class="text-gray-400 hover:text-amber-400 transition duration-300">Preguntas frecuentes</a></li>
+                        <li><a href="#contacto" class="text-gray-400 hover:text-amber-400 transition duration-300">Políticas</a></li>
+                        <li><a href="#contacto" class="text-gray-400 hover:text-amber-400 transition duration-300">Trabaja con nosotros</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt text-amber-400 mr-2"></i> Av 28 Ote #215, Puebla</li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt text-amber-400 mr-2"></i> 222-899-2473</li>
+                        <li class="flex items-center"><i class="fas fa-envelope text-amber-400 mr-2"></i> info@rezoort.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Rezoort. Todos los derechos reservados.</p>
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/reZOOrt" target="_blank" class="text-gray-400 hover:text-amber-400 transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com/rezoort" target="_blank" class="text-gray-400 hover:text-amber-400 transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/522228992473" target="_blank" class="text-gray-400 hover:text-amber-400 transition duration-300">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Booking tabs
+        const bookingTabs = document.querySelectorAll('.booking-tab');
+        const bookingContents = document.querySelectorAll('.booking-content');
+
+        bookingTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                bookingTabs.forEach(t => t.classList.remove('active', 'bg-amber-700'));
+                // Add active class to clicked tab
+                this.classList.add('active', 'bg-amber-700');
+                
+                // Hide all content
+                bookingContents.forEach(content => content.classList.add('hidden'));
+                // Show selected content
+                const tabId = this.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+
+        // Date pickers
+        flatpickr("#lodging-dates", {
+            mode: "range",
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            locale: "es"
+        });
+
+        flatpickr("#vet-date", {
+            enableTime: true,
+            minDate: "today",
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true,
+            minuteIncrement: 30,
+            locale: "es",
+            defaultHour: 10,
+            defaultMinute: 0,
+            minTime: "09:00",
+            maxTime: "18:00"
+        });
+
+        // File upload display
+        document.getElementById('records-files').addEventListener('change', function(e) {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+            
+            if (this.files.length > 0) {
+                fileList.innerHTML = '<p class="font-medium">Archivos seleccionados:</p>';
+                Array.from(this.files).forEach(file => {
+                    fileList.innerHTML += `<p class="truncate"><i class="fas fa-file-alt mr-2"></i>${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)</p>`;
+                });
+            }
+        });
+
+        // Form submissions (simulated)
+        document.getElementById('lodging-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Reserva de hospedaje enviada con éxito! Nos pondremos en contacto contigo para confirmar.');
+            this.reset();
+        });
+
+        document.getElementById('vet-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Cita veterinaria solicitada con éxito! Te enviaremos un correo de confirmación.');
+            this.reset();
+        });
+
+        document.getElementById('records-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Registros de salud enviados con éxito! Gracias por completar este paso importante.');
+            this.reset();
+            document.getElementById('file-list').innerHTML = '';
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Mensaje enviado con éxito! Responderemos a tu consulta lo antes posible.');
+            this.reset();
+        });
+
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            fadeInObserver.observe(element);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+	
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "PetBoardingService",
+	  "name": "Rezoort",
+	  "url": "https://rezoort.com",
+	  "image": "https://rezoort.com/assets/logo-rezoort.jpg",
+	  "description": "Rezoort es un hotel para mascotas y guardería canina en Puebla, México, que ofrece hospedaje, cuidado diario y atención personalizada para perros.",
+	  "telephone": "+52 222-899-2473",
+	  "address": {
+		"@type": "PostalAddress",
+		"streetAddress": "Av 28 Ote #215, Xanenetla",
+		"addressLocality": "Puebla",
+		"postalCode": "72290",
+		"addressRegion": "PUE",
+		"addressCountry": "MX"
+	  },
+	  "geo": {
+		"@type": "GeoCoordinates",
+		"latitude": 19.0530257,
+		"longitude": -98.192828
+	  },
+	  "areaServed": {
+		"@type": "City",
+		"name": "Puebla"
+	  },
+	  "priceRange": "$$",
+	  "sameAs": [
+		"https://www.facebook.com/reZOOrt",
+		"https://instagram.com/rezoort",
+		"https://wa.me/522228992473"
+	  ],
+	  "openingHoursSpecification": [
+		{
+		  "@type": "OpeningHoursSpecification",
+		  "dayOfWeek": [
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday",
+			"Saturday"
+		  ],
+		  "opens": "09:00",
+		  "closes": "19:00"
+		},
+		{
+		  "@type": "OpeningHoursSpecification",
+		  "dayOfWeek": [
+			"Sunday"
+		  ],
+		  "opens": "09:00",
+		  "closes": "17:00"
+		}
+	  ],
+	  "serviceType": [
+		"Doggy Daycare",
+		"Pet Boarding",
+		"Pet Hotel"
+	  ]
+	}
+	</script>
+</body>
+</html>
