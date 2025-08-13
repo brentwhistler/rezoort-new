@@ -29,7 +29,7 @@ function doGet(e) {
   
   try {
     const placeId = e.parameter.placeId || 'ChIJ__-DoiZBw4URdYMkjBu2ykM';
-    const apiKey = 'AIzaSyBN2MxWMQiHCZ-qno_evfBBsCf1Y2wKTZA';
+    const apiKey = 'redacted';
     
     // Fetch place details from Google Places API
     const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews,rating,user_ratings_total,name,formatted_address&key=${apiKey}`;
